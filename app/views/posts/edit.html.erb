@@ -1,7 +1,7 @@
 <center><h2>Eding a post:</h2>
 <%= form_for([@user, @post]) do |f| %>
     <%= render partial: "form", locals:{ f: f} %>
-    <%= f.submit "update" %>
+    <%= f.submit "Update Post", class: "btn btn-large btn-primary" %>
   </p>
 <% end %>
 
