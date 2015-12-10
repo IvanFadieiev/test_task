@@ -27,7 +27,11 @@
     <%= f.label :password_confirmation, "Confirmation" %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+  <div class="field">
+    <%= f.label :avatar%>
+    <%= f.file_field :avatar %>
+  </div>
   <div class="actions">
-    <%= f.submit "Create account", class: "btn btn-large btn-primary"%>
+    <%= f.submit "Enter", class: "btn btn-large btn-primary"%>
   </div>
 <% end %>
