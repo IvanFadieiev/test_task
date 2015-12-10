@@ -13,27 +13,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    # if params[:by_poster]
-    #   @posts = Post.search(params[:by_poster])
-    # elsif params[:by_body]
-    #   @posts = Post.search_body(params[:by_body])
-    # elsif params[:by_name]
-    #   find_name = User.find_by_user(params[:by_name])
-    #   if find_name.nil?
-    #     redirect_to :back, notice: "User '#{params[:by_name]}' not found"
-    #   else
-    #     @posts = find_name.posts
-    #   end
-    # elsif params[:by_city]
-    #   find_city = User.find_by_city(params[:by_city])
-    #   if find_city.nil?
-    #     redirect_to :back, notice: "There are no posts from the city '#{params[:by_city]}'"
-    #   else
-    #     @posts = find_city.posts
-    #   end
-    # else
       @posts = Post.all
-    # end
   end
 
   def new
