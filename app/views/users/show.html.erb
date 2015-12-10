@@ -1,15 +1,21 @@
-<p><div class="round-image-300">
-  <%= image_tag(@user.avatar.url(:medium)) %>
-</div></p>
+<center>
+__________________________________________________________
+  <p><div class="round-image-300">
+    <%= image_tag(@user.avatar.url(:medium)) %>
+  </div></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<%= link_to 'Back', users_path %>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+  <%= link_to "New post", new_user_post_path(@user)%><br>
+  <%= link_to 'Edit Profile', edit_user_path(@user) %><br>
+  <%= link_to 'Destroy Profile', @user, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+  <%= link_to 'Back', users_path %><br>
+__________________________________________________________
+</center>

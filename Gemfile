@@ -47,3 +47,6 @@ end
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'paperclip'
+gem "redcloth-rails"
+gem 'RedCloth', '~> 4.2', '>= 4.2.9'
+gem 'responders'
