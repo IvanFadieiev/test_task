@@ -1,0 +1,30 @@
+<center>
+<h1>Listing Post</h1>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Author</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><div class="round-image-50"><%= image_tag(post.user.avatar.url(:thumb)) %></div></td>
+          <td><strong><%= post.user.name%></strong></td>
+          <td><%= RedCloth.new(post.title).to_html.html_safe %></td>
+          <td><%= RedCloth.new(truncate(post.body, length: 100, separator: ' ')).to_html.html_safe %></td>
+          <td><span class="timestamp">
+                Posted <%= time_ago_in_words(post.created_at) %> ago.
+              </span>
+          </td>
+          <td><%= link_to 'show', post_path(post) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br>
+</center>

@@ -1,33 +1,28 @@
-
-
-<h1>Listing Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
+<p id="notice"><%= notice %></p>
+<center>
+  <h1>Listing Users</h1>
+  <table>
+    <thead>
       <tr>
-        <td> <div class="round-image-50">
-          <%= image_tag(user.avatar.url(:small)) %>
-        </div></td>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <% if current_user?(user) %>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
+        <th></th>
+        <th>Name</th>
+        <th>Email</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><div class="round-image-50">
+            <%= image_tag(user.avatar.url(:small)) %>
+          </div></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= link_to 'Show', user %></td>
+          <%end%>
+        </tr>
+    </tbody>
+  </table>
+  <br>
+</center>

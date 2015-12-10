@@ -1,0 +1,24 @@
+
+<center>
+_______________________________________
+ <div class="round-image-300">
+<%= image_tag(@avatar.url(:medium)) %>
+      </div>
+<strong> Author: </strong><%= @post.user.name%>
+<p>
+  <strong><h2>Title:</h2></strong>
+  <%= RedCloth.new(@post.title).to_html.html_safe %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= RedCloth.new(@post.body).to_html.html_safe %>
+</p>
+<br>
+<%= link_to 'Edit', edit_post_path(@post) %><br>
+<%= link_to "Delete", @posts, method: :delete, data: { confirm: "You sure?" }%><br>
+
+________________________________________
+</center>
+
+
