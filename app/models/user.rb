@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
@@ -8,7 +9,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: { minimum: 4 }
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :small => "100x100#" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :small => "100x100#" }, :default_url => "/images/:style/missing.png",:url  => "/tmp/products/:id/:style/:basename.:extension",
+:path => ":rails_root/tmp/products/:id/:style/:basename.:extension"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   
   def User.new_remember_token
