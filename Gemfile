@@ -53,3 +53,4 @@ gem 'responders'
 gem 'sprockets', '~> 3.4'
 gem 'will_paginate', '~> 3.0.6'
 gem 'ckeditor'
+gem 'rails_12factor', group: :production
