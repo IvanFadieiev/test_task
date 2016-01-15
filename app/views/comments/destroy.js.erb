@@ -1,3 +1,9 @@
 $('.deleteAction').bind('ajax:success', function() {
-   $(this).closest('tr').fadeOut(100);
+	if ($(this).closest('.comment').next().hasClass("comment_list")) {
+		$(this).closest('.comment').slideUp(300);
+		$(this).closest('.comment').next().slideUp(300);
+    }
+    else{
+    	$(this).closest('.comment').slideUp(300);
+    } 	
 });

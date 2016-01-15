@@ -7,13 +7,15 @@ class PostsController < ApplicationController
     @post = @user.posts.create(post_params)
     if @post.save
       redirect_to posts_path
+      flash[:success] = "Обьявление удачно добавлено!"
     else
       render 'new'
     end
   end
 
   def index
-      @posts = Post.all
+    @posts = Post.paginate(page: params[:page], per_page: 10)
+
   end
 
   def new
@@ -24,7 +26,7 @@ class PostsController < ApplicationController
     begin
       @post = Post.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        logger.error "Post #{params[:id]} not found"
+        logger.error "Обьявление #{params[:id]} не найдено!"
         redirect_to posts_path
       else
         @user = @post.user
@@ -35,6 +37,7 @@ class PostsController < ApplicationController
   def destroy
     if @post.destroy
       redirect_to posts_path
+      flash[:success] = "Обьявление удалено!"
     end
   end
 
@@ -44,13 +47,14 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       redirect_to post_path(@post)
+      flash[:success] = "Обьявление обновлено!"
     else
       render 'edit'
     end
   end
 
   def my_posts
-    @post = current_user.posts
+    @post = current_user.posts.paginate(page: params[:page], per_page:5)
   end
 
   def avatar

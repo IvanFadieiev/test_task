@@ -1,3 +1,59 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// .round-image-50{
+// 	position: relative;
+// 	top: 70px;
+// 	right: 55px;
+// }
+
+
+.comment{
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	margin-top:10px; 
+	background:#eee 0 100%;
+	border:1px solid white;
+}
+.round-image-50{
+	float:left;
+	margin:10px 10px 10px 10px;
+}
+div.body{
+	margin:0 0 10px 10px;
+}
+.for_reply .row .col-md-4.col-md-offset-4{
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	margin-top:10px; 
+	background:#eee 0 100%;
+	border:1px solid white;
+	margin-bottom:20px;
+}
+.close {
+    background-color: rgba(61, 61, 61, 0.8);
+    border: 2px solid #ccc;
+    height: 25px;
+    line-height: 20px;
+    position: absolute;
+    right: -17px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;padding: 0;
+    top: -17px;
+    width: 25px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+.close:before {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+}
+.close:hover {
+    background-color: rgba(252, 20, 0, 0.8);
+}

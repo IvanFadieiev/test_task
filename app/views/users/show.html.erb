@@ -1,11 +1,11 @@
-<center>
-__________________________________________________________
+<center >
+<div id="show_user">
   <p><div class="round-image-300">
     <%= image_tag(@user.avatar.url(:medium)) %>
   </div></p>
 
   <p>
-    <strong>Name:</strong>
+    <strong>Имя:</strong>
     <%= @user.name %>
   </p>
 
@@ -13,6 +13,24 @@ __________________________________________________________
     <strong>Email:</strong>
     <%= @user.email %>
   </p>
-  <%= link_to 'Back', users_path %><br>
-__________________________________________________________
+  <%= link_to 'Назад', users_path %><br>
+</div>
 </center>
+<%if @posts.any?%>
+<center><h3>Обьявления пользователя:</h3> </center>
+<% @posts.each do |post| %>
+    <div class="my_posts">
+      <div class="timestamp">
+        <%= post.created_at%>
+      </div>
+        <%= RedCloth.new(post.title).to_html.html_safe %>
+        <%= RedCloth.new(truncate(post.body, length: 100, separator: ' ')).to_html.html_safe %>
+      <td><%= link_to 'Посмотреть', post_path(post) %></td>
+    </div>
+<% end %>
+<div class="apple_pagination">
+  <%= will_paginate @posts %>
+</div>
+<%else%>
+<center><h3>У пользователя пока нет обьявлений</h3> </center>
+<%end%>

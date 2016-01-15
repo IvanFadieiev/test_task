@@ -1,0 +1,7 @@
+		
+	$('a.reply').bind('ajax:success', function(){
+	$('.for_reply').remove();
+	$("<%= j render 'comments/new' %>").insertAfter('body > div.container > a');
+	$('#comment_title').focus();
+	$('.for_reply .row .col-md-4.col-md-offset-4').fadeIn().css({ 'width': Number( '100%' ) }).append('<a href="#" title="Закрыть" class="close"></a>');
+});	

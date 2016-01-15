@@ -1,5 +1,7 @@
   <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
+    <%= f.text_area :title, rows:1, placeholder: "Напишите заголовок..." %>
+  </p>
+  <p>
+    <%= f.cktext_area :body, rows:8, placeholder: "Напишите комменарий..." %>
   </p>
     

@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 <center>
-  <h1>Listing Users</h1>
+  <h1>Список пользователей</h1>
   <table>
     <thead>
       <tr>
         <th></th>
-        <th>Name</th>
+        <th>Имя</th>
         <th>Email</th>
         <th colspan="3"></th>
       </tr>
@@ -19,10 +19,13 @@
           </div></td>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
-          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Просмотр', user %></td>
           <%end%>
         </tr>
     </tbody>
   </table>
   <br>
+  <div class="apple_pagination">
+    <%= will_paginate @users %>
+  </div>
 </center>
