@@ -1,0 +1,3 @@
+$('#popup_name, #fade').fadeOut(500);
+$('#comment_title,#comment_body').val('');
+$('.comment_list:first').prepend('<%= j render(@comment) %>');

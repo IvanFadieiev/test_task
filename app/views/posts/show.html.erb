@@ -1,62 +1,39 @@
+<div class="post">
+  <div class="round-image-300">
+    <%= image_tag(@avatar.url(:medium)) %>
+  </div>
+  <div class="post_show">
+    <strong> Автор: </strong><%= @post.user.name%>
+      <strong>
+        <%= RedCloth.new(@post.title).to_html.html_safe %>
+      </strong>
+      <%= (@post.body).html_safe %>
 
-<center>
-_______________________________________
- <div class="round-image-300">
-<%= image_tag(@avatar.url(:medium)) %>
+      <div class="timestamp">
+        <%= @post.created_at%>
       </div>
-<strong> Author: </strong><%= @post.user.name%>
-<p>
-  <strong><h2>Title:</h2></strong>
-  <%= RedCloth.new(@post.title).to_html.html_safe %>
-</p>
+    <br>
+    <% if current_user.id == @post.user_id  %>
+      | <%= link_to "Правка", edit_post_path%> |
+      <%= link_to "Удалить", @posts, method: :delete, data: { confirm: "You sure?" }%> |<br>
+    <%end%>
+  </div> 
+</div> 
+<ul class="comment_list">
+  <%= render :partial => 'comments/comment', :collection => @post.comments %>
+</ul>
+<a href="#?w=500" rel="popup_name" class="poplight">Написать комментарий</a>
+  <div id="popup_name" class="popup_block">
+    <h2>Написать комментарий:</h2>
+    <center>
+      <%= form_for([@post, @post.comments.build], remote: true) do |f| %>
+        <%= render partial: "comments/form", locals:{ f: f} %>
+        <p>
+          <%= f.submit "Написать Комментарий", class: "btn btn-large btn-primary", id:"com_post" %>
+        </p>
+      </center>
+    <% end %>
+  </div>   
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= RedCloth.new(@post.body).to_html.html_safe %>
-</p>
-<br>
-<% if current_user.id == @post.user_id  %>
-  | <%= link_to "Edit", edit_post_path%> |
-  <%= link_to "Delete", @posts, method: :delete, data: { confirm: "You sure?" }%> |<br>
-<%end%>
-____________________________
-</center>
 
-<table id='post_comments'>
-  <thead>
-  <% if @post.comments.count == 0 %>
-      <h3>Dear <%=current_user.name%>, pleas write first comment!</h3>
-  <% else%> 
-      <tr>
-        <th></th>
-        <th></th>
-        <th><strong>Commenter: </strong></th>
-        <th><strong>Comment:   </strong></th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr></tr>
-      <% @post.comments.each do |com| %>
-        <tr>
-          <td><%= com.id %></td>
-          <td><div class="round-image-50"><%= image_tag(com.user.avatar.url(:medium)) %></div></td>
-          <td><%= com.user.name %></td>
-          <td><%= com.body %></td>
-            <% if current_user.id == com.user_id  %>
-          <td><%= link_to 'Edit', edit_post_comment_path(@post.id, com) %></td>
-          <td><%= link_to "Destroy", com, method: :delete, data: { confirm: "точно?"}, remote: true, class: 'deleteAction' %></td>
-            <%end%>
-       <% end%>
-      </tr>
-    <% end%>
-  </tbody>
-</table>
-
-<h2>Add a comment:</h2>
-<%= form_for([@post, @post.comments.build]) do |f| %>
-  <%= render partial: "comments/form", locals:{ f: f} %>
-  <p>
-    <%= f.submit "Add Comment", class: "btn btn-large btn-primary" %>
-  </p>
-<% end %>

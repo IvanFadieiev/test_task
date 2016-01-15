@@ -1,21 +1,19 @@
- <center> <h1><strong>My POSTS</strong><br></h1>
-   <div class="round-image-300">
-<%= image_tag(current_user.avatar.url(:medium)) %>
-      </div>
-<p>
-_______________________________________
-<% @post.each do |post| %>
-
-<p>
-  <strong>Title:</strong>
-  <%= RedCloth.new(post.title).to_html.html_safe %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <td><%= RedCloth.new(truncate(post.body, length: 100, separator: ' ')).to_html.html_safe %></td>
-</p>
-<td><%= link_to 'show', post_path(post) %></td><br>
-_______________________________________
-<% end %>
+<center> <h1><strong>Мои Обьявления</strong><br></h1>
+  <div class="round-image-300">
+    <%= image_tag(current_user.avatar.url(:medium)) %>
+  </div>
 </center>
+<p>
+  <% @post.each do |post| %>
+    <div class="my_posts">
+      <div class="timestamp">
+        <%= post.created_at%>
+      </div>
+        <%= RedCloth.new(post.title).to_html.html_safe %>
+        <%= RedCloth.new(truncate(post.body, length: 100, separator: ' ')).to_html.html_safe %>
+      <td><%= link_to 'Посмотреть', post_path(post) %></td>
+    </div>
+<% end %>
+<div class="apple_pagination">
+  <%= will_paginate @post %>
+</div>

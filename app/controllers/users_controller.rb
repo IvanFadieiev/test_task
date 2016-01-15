@@ -2,11 +2,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 9)
+
   end
 
 
   def show
+    @posts = @user.posts.paginate(page: params[:page], per_page: 3)
   end
 
 
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome Blog!"
+      flash[:success] = "Добро пожаловать на сайт обьявлений!"
       redirect_to @user
     else
       render 'new'
@@ -46,11 +48,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to :root }
-      format.json { head :no_content }
-      redirect_to :root
-    end
+    redirect_to :root
+    flash[:success] = "Пользователь удален!"
   end
 
   private

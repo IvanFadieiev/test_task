@@ -1,9 +1,11 @@
-<center><h2>Add a post:</h2>
-<%= form_for([@user, @user.posts.build]) do |f| %>
-    <%= render partial: "form", locals:{ f: f} %>
-    <%= f.submit "Add Post", class: "btn btn-large btn-primary" %>
-  </p>
-<% end %>
+<div class="post_new">
+  <center><h2>Добавить Обьявление:</h2>
+  <%= form_for([@user, @user.posts.build]) do |f| %>
+      <%= render partial: "form", locals:{ f: f} %>
+      <%= f.submit "Добавить Обьявление", class: "btn btn-large btn-primary" %>
+    </p>
+  <% end %>
 
-<%= link_to 'Back', current_user%>
-</center>
+  <%= link_to 'Назад', :back%>
+  </center>
+</div>
