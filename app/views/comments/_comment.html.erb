@@ -8,7 +8,7 @@
     <h3><%= comment.title %></h3>
     <%= RedCloth.new(comment.body).to_html.html_safe %>
         <p>
-      <%= link_to 'Ответить', new_comment_comment_path(comment),class: "reply",remote: true %>
+      <%= link_to 'Ответить', new_comment_comment_path(comment),class: "reply" %>
       <% if current_user.id == comment.user_id  %> | 
       <%= link_to 'Правка', edit_comment_path(comment)%> |
       <%= link_to "Удалить", comment, method: :delete, data: { confirm: "Уверены?"}, remote: true, class: 'deleteAction' %>

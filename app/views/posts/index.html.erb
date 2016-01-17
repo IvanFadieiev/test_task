@@ -4,15 +4,19 @@
 <p>
   <% @posts.each do |post| %>
     <div class="listing_posts">
-    <div class="round-image-50">
-      <%= image_tag(post.user.avatar.url(:thumb)) %>
-    </div>
+      <div class="round-image-50">
+        <%= image_tag(post.user.avatar.url(:medium)) %>
+      </div>
       <div class="timestamp">
         <%= post.created_at%>
       </div>
-        <%= RedCloth.new(post.title).to_html.html_safe %>
-        <%= RedCloth.new(truncate(post.body, length: 100, separator: ' ')).to_html.html_safe %>
-      <td><%= link_to 'Посмотреть', post_path(post) %></td>
+      <%= RedCloth.new(post.title).to_html.html_safe %>
+      <%= RedCloth.new(truncate(post.body,length: 100, omission: "..." , escape: false)).to_html.html_safe %><br><br>
+      <%= link_to 'Посмотреть', post_path(post) %>
+      <% if current_user.id == post.user_id  %>
+        | <%= link_to "Правка", edit_post_path(post)%> |
+        <%= link_to "Удалить", post, method: :delete, data: { confirm: "Уверены?"}, remote: true, class: 'deleteAction' %>
+       <%end%>
     </div>
 <% end %>
 <center>

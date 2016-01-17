@@ -24,7 +24,7 @@
         <%= post.created_at%>
       </div>
         <%= RedCloth.new(post.title).to_html.html_safe %>
-        <%= RedCloth.new(truncate(post.body, length: 100, separator: ' ')).to_html.html_safe %>
+        <%= RedCloth.new(truncate(post.body, length: 100, separator: ' ', escape: false)).to_html.html_safe %>
       <td><%= link_to 'Посмотреть', post_path(post) %></td>
     </div>
 <% end %>

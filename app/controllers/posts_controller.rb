@@ -1,8 +1,8 @@
+# posts_controller
 class PostsController < ApplicationController
-  # posts_controller
   before_filter :find_post, only: [:destroy, :edit, :update]
   before_filter :find_user, only: [:new, :avatar, :create]
-  respond_to :html, :js, :json
+  respond_to :html, :json, :js
   def create
     @post = @user.posts.create(post_params)
     if @post.save
@@ -15,7 +15,6 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.paginate(page: params[:page], per_page: 10)
-
   end
 
   def new
@@ -23,21 +22,21 @@ class PostsController < ApplicationController
   end
 
   def show
-    begin
-      @post = Post.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        logger.error "Обьявление #{params[:id]} не найдено!"
-        redirect_to posts_path
-      else
-        @user = @post.user
-        @avatar = @user.avatar
-      end
+    @post = Post.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    logger.error "Обьявление #{params[:id]} не найдено!"
+    redirect_to posts_path
+  else
+    @user = @post.user
+    @avatar = @user.avatar
   end
 
   def destroy
-    if @post.destroy
-      redirect_to posts_path
-      flash[:success] = "Обьявление удалено!"
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to posts_url }
+      format.json { head :no_content }
+      format.js { render layout: false }
     end
   end
 
@@ -54,7 +53,7 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    @post = current_user.posts.paginate(page: params[:page], per_page:5)
+    @post = current_user.posts.paginate(page: params[:page], per_page: 5)
   end
 
   def avatar
@@ -75,4 +74,3 @@ class PostsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 end
-

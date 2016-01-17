@@ -62,3 +62,10 @@ $(document).on('click','.btn.btn-large.btn-primary', function() {
     $('.for_reply').slideUp();
 });
 
+$(document).ready(function(){
+    $('form[data-remote]').bind('ajax:before', function(){
+      for (instance in CKEDITOR.instances){
+        CKEDITOR.instances[instance].updateElement();
+      }
+    });
+  });

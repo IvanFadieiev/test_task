@@ -13,10 +13,6 @@
         <%= @post.created_at%>
       </div>
     <br>
-    <% if current_user.id == @post.user_id  %>
-      | <%= link_to "Правка", edit_post_path%> |
-      <%= link_to "Удалить", @posts, method: :delete, data: { confirm: "You sure?" }%> |<br>
-    <%end%>
   </div> 
 </div> 
 <ul class="comment_list">

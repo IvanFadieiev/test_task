@@ -1,5 +1,7 @@
+# SessionsController
 class SessionsController < ApplicationController
   def new
+    signed_in
   end
 
   def create
@@ -18,5 +20,14 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to :root
     flash[:success] = "Всего хорошего!"
+  end
+  
+  private
+
+  def signed_in
+    if signed_in?
+      @user = current_user
+      redirect_to user_path(@user)
+    end
   end
 end
