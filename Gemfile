@@ -52,3 +52,9 @@ gem 'ckeditor'
 gem 'rails_12factor', group: :production
 gem 'pry'
 gem 'pry-nav'
+group :production do
+  gem 'unicorn'
+end
+group :development do
+  gem 'capistrano', github: 'capistrano/capistrano', ref: '96a16'
+end
